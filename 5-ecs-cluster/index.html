@@ -12,21 +12,21 @@
     <title>Tạo ECS cluster :: AWS System Manager</title>
 
     
-    <link href="/WorkShopOnePage/css/nucleus.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/fontawesome-all.min.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/hybrid.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/featherlight.min.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/perfect-scrollbar.min.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/auto-complete.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/atom-one-dark-reasonable.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/theme.css?1709871993" rel="stylesheet">
-    <link href="/WorkShopOnePage/css/hugo-theme.css?1709871993" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/nucleus.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/fontawesome-all.min.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/hybrid.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/featherlight.min.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/perfect-scrollbar.min.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/auto-complete.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/atom-one-dark-reasonable.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/theme.css?1709872543" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/hugo-theme.css?1709872543" rel="stylesheet">
     
-    <link href="/WorkShopOnePage/css/theme-workshop.css?1709871993" rel="stylesheet">
+    <link href="/WorkShopOnePage/css/theme-workshop.css?1709872543" rel="stylesheet">
     
     
 
-    <script src="/WorkShopOnePage/js/jquery-3.3.1.min.js?1709871993"></script>
+    <script src="/WorkShopOnePage/js/jquery-3.3.1.min.js?1709872543"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/WorkShopOnePage/js/lunr.min.js?1709871993"></script>
-<script type="text/javascript" src="/WorkShopOnePage/js/auto-complete.js?1709871993"></script>
+<script type="text/javascript" src="/WorkShopOnePage/js/lunr.min.js?1709872543"></script>
+<script type="text/javascript" src="/WorkShopOnePage/js/auto-complete.js?1709872543"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/nguyenduong21.github.io\/WorkShopOnePage\/";
     
 </script>
-<script type="text/javascript" src="/WorkShopOnePage/js/search.js?1709871993"></script>
+<script type="text/javascript" src="/WorkShopOnePage/js/search.js?1709872543"></script>
 
     
   </div>
@@ -382,7 +382,7 @@
 <ul>
 <li>Click <strong>Task definitions</strong> , sau đó Chọn <strong>Create new task definition</strong>.</li>
 </ul>
-<p><img alt="ECS" src="images/image12.png"></p>
+<p><img alt="ECS" src="/images/image12.png"></p>
 <ol start="2">
 <li>Tại trang <strong>Create new task definition</strong>, Mục <strong>Infrastructure requirements</strong></li>
 </ol>
@@ -391,7 +391,7 @@
 <li>Click chọn <strong>Launch type</strong>. Ở đây chúng ta chọn <strong>AWS Fargate</strong></li>
 <li>Chọn CPU và RAM cho  <strong>Fargate Instance</strong></li>
 </ul>
-<p><img alt="ECS" src="images/image13.png"></p>
+<p><img alt="ECS" src="/images/image13.png"></p>
 <ol start="3">
 <li>Ở mục <strong>Container</strong>.</li>
 </ol>
@@ -400,11 +400,11 @@
 <li>Nhập <strong>Port</strong> và <strong>Port Name</strong>, ở đây ứng dụng của chúng ta expose ra port 3000.</li>
 <li>Click <strong>Create</strong>.</li>
 </ul>
-<p><img alt="ECS" src="images/image14.png"></p>
+<p><img alt="ECS" src="/images/image14.png"></p>
 <ol start="4">
 <li>Sau khi tạo thành công, ta được kết quả sau</li>
 </ol>
-<p><img alt="ECS" src="images/image15.png"></p>
+<p><img alt="ECS" src="/images/image15.png"></p>
 <h4 id="tạo-ecs-cluster">Tạo ECS Cluster</h4>
 <ol>
 <li>
@@ -414,7 +414,7 @@
 <p>Nhập tên cluster và loại Infrastructure và tạo cluster</p>
 </li>
 </ol>
-<p><img alt="ECS" src="images/image16.png"></p>
+<p><img alt="ECS" src="/images/image16.png"></p>
 <h4 id="tạo-service">Tạo service</h4>
 <ol>
 <li>
@@ -424,7 +424,7 @@
 <p>Tại mục Compute options, chọn Launch type là FARGATE</p>
 </li>
 </ol>
-<p><img alt="ECS" src="images/image17.png"></p>
+<p><img alt="ECS" src="/images/image17.png"></p>
 <ol start="3">
 <li>Tại Deployment configuration:</li>
 </ol>
@@ -435,18 +435,18 @@
 <li>Nhập số lượng replica</li>
 <li>Cuối cùng nhấn vào create</li>
 </ul>
-<p><img alt="ECS" src="images/image18.png"></p>
+<p><img alt="ECS" src="/images/image18.png"></p>
 <ol start="4">
 <li>Kiểm tra service và truy cập thử</li>
 </ol>
 <ul>
 <li>Tại mục service ta có thể thấy số lượng service và tasks đang chạy</li>
 </ul>
-<p><img alt="ECS" src="images/image19.png"></p>
+<p><img alt="ECS" src="/images/image19.png"></p>
 <ul>
 <li>Lấy địa chỉ ip và thử truy cập</li>
 </ul>
-<p><img alt="ECS" src="images/image20.png"></p>
+<p><img alt="ECS" src="/images/image20.png"></p>
 <p>Qua bài này chúng ta đã biết các thiết lập các VPC endpoint để các dịch vụ như ECS, ECR, CloudWatch, S3 giao tiếp bảo mật với nhau không thông qua internet và tiết kiệm chi phí chuyền dữ liệu.</p>
 
 
@@ -608,19 +608,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/WorkShopOnePage/js/clipboard.min.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/perfect-scrollbar.min.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/perfect-scrollbar.jquery.min.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/jquery.sticky.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/featherlight.min.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/highlight.pack.js?1709871993"></script>
+    <script src="/WorkShopOnePage/js/clipboard.min.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/perfect-scrollbar.min.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/perfect-scrollbar.jquery.min.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/jquery.sticky.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/featherlight.min.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/highlight.pack.js?1709872543"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/WorkShopOnePage/js/modernizr.custom-3.6.0.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/learn.js?1709871993"></script>
-    <script src="/WorkShopOnePage/js/hugo-learn.js?1709871993"></script>
+    <script src="/WorkShopOnePage/js/modernizr.custom-3.6.0.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/learn.js?1709872543"></script>
+    <script src="/WorkShopOnePage/js/hugo-learn.js?1709872543"></script>
 
-    <link href="/WorkShopOnePage/mermaid/mermaid.css?1709871993" rel="stylesheet" />
-    <script src="/WorkShopOnePage/mermaid/mermaid.js?1709871993"></script>
+    <link href="/WorkShopOnePage/mermaid/mermaid.css?1709872543" rel="stylesheet" />
+    <script src="/WorkShopOnePage/mermaid/mermaid.js?1709872543"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
