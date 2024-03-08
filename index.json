@@ -1,62 +1,62 @@
 [
 {
-	"uri": "https://nguyenduong21.github.io/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/",
 	"title": "ECR interface VPC endpoints",
 	"tags": [],
 	"description": "",
 	"content": "Kết nối an toàn, tiết kiệm chi phí cho ECS, ECR, CloudWatch sử dụng vpc endpoint Tổng quan Trong bài lab này, chúng ta sẽ cùng tìm hiểu cách thiết lập kết nối an toàn và tiết kiệm chi phí giữa ECS, ECR, CloudWatch, S3 sử dụng vpc endpoint\nNội dung Giới thiệu Các bước chuẩn bị Tạo ECR private và push image Tạo ECS cluster Tạo các ENDPOINT Thử nghiệm kết nối Dọn dẹp tài nguyên "
 },
 {
-	"uri": "https://nguyenduong21.github.io/1-introduce/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/1-introduce/",
 	"title": "Giới thiệu",
 	"tags": [],
 	"description": "",
 	"content": "VPC Endpoint (Virtual Private Cloud Endpoint) là một dịch vụ trong Amazon Web Services (AWS) được thiết kế để kết nối giữa các tài nguyên trong một Virtual Private Cloud (VPC) của bạn và các dịch vụ AWS công cộng như Amazon S3, DynamoDB, SNS, SQS, ECR, CloudWatch và nhiều dịch vụ khác mà không cần thông qua Internet.\nTruy cập trực tiếp từ VPC đến các dịch vụ công cộng của AWS thông qua VPC Endpoint có nhiều lợi ích như:\nBảo mật: Dữ liệu không cần phải truy cập Internet, giảm nguy cơ bị tấn công từ bên ngoài.\nHiệu suất: Truy cập trực tiếp đến các dịch vụ, giảm độ trễ so với việc truy cập thông qua Internet.\nGiảm chi phí: Không cần sử dụng gateway hoặc kết nối Direct Connect để truy cập dịch vụ AWS. Có hai loại VPC Endpoint:\nGateway Endpoint: Dùng cho các dịch vụ S3 và DynamoDB. Nó cho phép truy cập từ VPC đến các dịch vụ này thông qua một gateway được quản lý bởi AWS.\nInterface Endpoint: Dùng cho hầu hết các dịch vụ AWS khác (ví dụ như SNS, SQS, Kinesis). Nó tạo ra một interface network trong VPC của bạn, giúp tạo kết nối trực tiếp với dịch vụ AWS. VPC Endpoint là một công cụ hữu ích trong việc tạo ra các mô hình kiến trúc cloud có hiệu suất cao và bảo mật.\nTrong bài lab này, chúng ta cùng sử dụng VPC Endpoint để kết khởi chạy ECS cluster kết nối với các dịch vụ ECR, CLoudWatch để tăng cường bảo mật và giảm chi phí.\n"
 },
 {
-	"uri": "https://nguyenduong21.github.io/2-prerequiste/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/2-prerequiste/",
 	"title": "Các bước chuẩn bị",
 	"tags": [],
 	"description": "",
 	"content": "Tạo VPC với 2 private subnet theo hình sau:\nChọn VPC and more nhập tên VPC, CIDR, và chọn 2 AZ Chọn 0 public subnet và 2 private subnet, chọn NAT gateways và S3 VPC endpoints là none Tạo và đợi việc tạo VPC hoàn thành. "
 },
 {
-	"uri": "https://nguyenduong21.github.io/3-ecr-private/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/3-ecr-private/",
 	"title": "Tạo ECR private",
 	"tags": [],
 	"description": "",
 	"content": "Chú ý: VPC Endpoin không hỗ trợ ECR public\nTrong bước này, chúng ta sẽ thực hiện tạo ECR private và push docker image lên ECR này\nTại ECR console, nhấn Create repository. Tại option Visibility settings chọn Private và Repository name Tải source code mẫu và build image Chọn vào repo và nhấn vào nút View push commands\nTag image vừa build và push lên ECR theo hướng dẫn Sau khi push image ta được kết quả sau: "
 },
 {
-	"uri": "https://nguyenduong21.github.io/4-vpc-endpoint/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/4-vpc-endpoint/",
 	"title": "Tạo VPC endpoint",
 	"tags": [],
 	"description": "",
 	"content": "Trong phần này, chúng ta sẽ cùng tạo VPC endpoint. Để kết nối ECS cluster với ECR, CloudWatch chúng ta cần tạo các endpoin sau:\ncom.amazonaws.region.ecr.dkr: Endpoint này được sử dụng cho Docker Registry APIs. Docker client như push và pull dùng endpoint này. com.amazonaws.region.ecr.api: Endpoint này dùng để gọi đến Amazon ECR API. com.amazonaws.region.s3: ECR dùng s3 để lưu các layer vì vậy ta phải tạo s3 gateway endpoint thì ecs mới có thể pull các layer từ image của ECR. com.amazonaws.region.logs: Dùng cho cloud watch logs Tạo Endpoint com.amazonaws.region.ecr.dkr chọn cả 2 private subnet của vpc: Tạo Endpoint om.amazonaws.region.ecr.api chọn cả 2 private subnet của vpc: Tạo Gateway Endpoint om.amazonaws.region.s3 chọn route tables của 2 private subnet: Tạo Endpoint om.amazonaws.region.logs chọn cả 2 private subnet của vpc: "
 },
 {
-	"uri": "https://nguyenduong21.github.io/5-ecs-cluster/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/5-ecs-cluster/",
 	"title": "Tạo ECS cluster",
 	"tags": [],
 	"description": "",
 	"content": "Chúng ta sẽ tạo ECS cluster pull image Từ ECR và push logs qua CloudWatch theo VPC endpoint\nTạo Task definitions Truy cập vào giao diện quản trị dịch vụ ECS Click Task definitions , sau đó Chọn Create new task definition. Tại trang Create new task definition, Mục Infrastructure requirements Tại mục Task definition family, điền Tên Task denfinition. Click chọn Launch type. Ở đây chúng ta chọn AWS Fargate Chọn CPU và RAM cho Fargate Instance Ở mục Container. Nhập tên container, Image URI (đường dẫn của private image mà chúng ta vừa push lên ECR ở mục 3) Nhập Port và Port Name, ở đây ứng dụng của chúng ta expose ra port 3000. Click Create. Sau khi tạo thành công, ta được kết quả sau Tạo ECS Cluster Truy cập vào giao diện quản trị dịch vụ ECS ở mục cluster chọn Create cluster\nNhập tên cluster và loại Infrastructure và tạo cluster\nTạo service Click vào cluster vừa tạo, Chọn create service\nTại mục Compute options, chọn Launch type là FARGATE\nTại Deployment configuration: Application type chọn là Service Task definition chọn Task definition vừa tạo ở bước trên. Revision là LATEST Nhập Service name Nhập số lượng replica Cuối cùng nhấn vào create Kiểm tra service và truy cập thử Tại mục service ta có thể thấy số lượng service và tasks đang chạy Lấy địa chỉ ip và thử truy cập Qua bài này chúng ta đã biết các thiết lập các VPC endpoint để các dịch vụ như ECS, ECR, CloudWatch, S3 giao tiếp bảo mật với nhau không thông qua internet và tiết kiệm chi phí chuyền dữ liệu.\n"
 },
 {
-	"uri": "https://nguyenduong21.github.io/6-cleanup/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/6-cleanup/",
 	"title": "Dọn dẹp tài nguyên  ",
 	"tags": [],
 	"description": "",
 	"content": "Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.\nTruy cập giao diện quản trị dịch vụ ECS Click vào cluster muốn xóa và nhấn Delete cluster. Nhập theo yêu cầu và xác nhận delete Truy cập giao diện quản trị dịch vụ VPC Click Endpoints. Tích vào 4 Endpoints đã tạo và chọn delete Truy cập giao diện quản trị dịch vụ ECR. Click chọn repositories muốn xóa. Click Delete, sau đó xác nhận để xóa. Truy cập vào giao diện quản trị dịch vụ VPC Click Your VPCs. Click chọn VPC muốn xóa. Click Actions. Click Delete VPC. Tại ô confirm, điền delete để xác nhận, click Delete để thực hiện xóa Lab VPC và các tài nguyên liên quan. "
 },
 {
-	"uri": "https://nguyenduong21.github.io/categories/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/categories/",
 	"title": "Categories",
 	"tags": [],
 	"description": "",
 	"content": ""
 },
 {
-	"uri": "https://nguyenduong21.github.io/tags/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/tags/",
 	"title": "Tags",
 	"tags": [],
 	"description": "",

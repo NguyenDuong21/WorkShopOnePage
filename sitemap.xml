@@ -2,24 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://nguyenduong21.github.io/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/</loc>
     <lastmod>1970-01-01T08:33:44+08:00</lastmod>
   </url><url>
-    <loc>https://nguyenduong21.github.io/1-introduce/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/1-introduce/</loc>
   </url><url>
-    <loc>https://nguyenduong21.github.io/2-prerequiste/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/2-prerequiste/</loc>
   </url><url>
-    <loc>https://nguyenduong21.github.io/3-ecr-private/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/3-ecr-private/</loc>
   </url><url>
-    <loc>https://nguyenduong21.github.io/4-vpc-endpoint/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/4-vpc-endpoint/</loc>
   </url><url>
-    <loc>https://nguyenduong21.github.io/5-ecs-cluster/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/5-ecs-cluster/</loc>
   </url><url>
-    <loc>https://nguyenduong21.github.io/6-cleanup/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/6-cleanup/</loc>
     <lastmod>1970-01-01T08:33:44+08:00</lastmod>
   </url><url>
-    <loc>https://nguyenduong21.github.io/categories/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/categories/</loc>
   </url><url>
-    <loc>https://nguyenduong21.github.io/tags/</loc>
+    <loc>https://nguyenduong21.github.io/WorkShopOnePage/tags/</loc>
   </url>
 </urlset>
