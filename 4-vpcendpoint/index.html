@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/WorkShopOnePage/images/favicon.png" type="image/png">
 
-    <title>Dọn dẹp tài nguyên   :: AWS System Manager</title>
+    <title>Tạo VPC endpoint :: AWS System Manager</title>
 
     
     <link href="/WorkShopOnePage/css/nucleus.css?1709873662" rel="stylesheet">
@@ -36,7 +36,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/WorkShopOnePage/6-cleanup/">
+  <body class="" data-url="/WorkShopOnePage/4-vpcendpoint/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -162,7 +162,7 @@
     
     <li data-nav-id="/WorkShopOnePage/4-vpcendpoint/" title="Tạo VPC endpoint" class="dd-item 
         
-        
+        active
         
         ">
       <a href="/WorkShopOnePage/4-vpcendpoint/">
@@ -214,7 +214,7 @@
     
     <li data-nav-id="/WorkShopOnePage/6-cleanup/" title="Dọn dẹp tài nguyên  " class="dd-item 
         
-        active
+        
         
         ">
       <a href="/WorkShopOnePage/6-cleanup/">
@@ -304,7 +304,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="nguyenduong21.github.io6-cleanup/_index.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="nguyenduong21.github.io4-VPCendpoint/_index.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -331,7 +331,7 @@
             
           
           
-            <a href='/WorkShopOnePage/'>ECR interface VPC endpoints</a> > Dọn dẹp tài nguyên  
+            <a href='/WorkShopOnePage/'>ECR interface VPC endpoints</a> > Tạo VPC endpoint
           
         
           
@@ -358,7 +358,7 @@
           
             <h1>
               
-              Dọn dẹp tài nguyên  
+              Tạo VPC endpoint
             </h1>
           
 
@@ -366,38 +366,21 @@
 
 
 
-	<p>Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.</p>
-<ol>
-<li>Truy cập <a href="https://console.aws.amazon.com/ecs/v2/clusters">giao diện quản trị dịch vụ ECS</a></li>
-</ol>
+	<p>Trong phần này, chúng ta sẽ cùng tạo VPC endpoint. Để  kết nối ECS cluster với ECR, CloudWatch chúng ta cần tạo các endpoin sau:</p>
 <ul>
-<li>Click vào cluster muốn xóa và nhấn Delete cluster.</li>
-<li>Nhập theo yêu cầu và xác nhận delete</li>
+<li>com.amazonaws.region.ecr.dkr: Endpoint này được sử dụng cho Docker Registry APIs. Docker client như push và pull dùng endpoint này.</li>
+<li>com.amazonaws.region.ecr.api: Endpoint này dùng để  gọi đến Amazon ECR API.</li>
+<li>com.amazonaws.region.s3: ECR dùng s3 để lưu các layer vì vậy ta phải tạo s3 gateway endpoint thì ecs mới có thể pull các layer từ image của ECR.</li>
+<li>com.amazonaws.region.logs: Dùng cho cloud watch logs</li>
 </ul>
-<ol start="2">
-<li>Truy cập <a href="https://console.aws.amazon.com/vpcconsole/home">giao diện quản trị dịch vụ VPC</a></li>
-</ol>
-<ul>
-<li>Click <strong>Endpoints</strong>.</li>
-<li>Tích vào 4 Endpoints đã tạo và chọn delete</li>
-</ul>
-<ol start="3">
-<li>Truy cập <a href="https://console.aws.amazon.com/ecr/home">giao diện quản trị dịch vụ ECR</a>.</li>
-</ol>
-<ul>
-<li>Click chọn repositories muốn xóa.</li>
-<li>Click <strong>Delete</strong>, sau đó xác nhận để xóa.</li>
-</ul>
-<ol start="4">
-<li>Truy cập vào <a href="https://console.aws.amazon.com/vpc/home">giao diện quản trị dịch vụ VPC</a></li>
-</ol>
-<ul>
-<li>Click <strong>Your VPCs</strong>.</li>
-<li>Click chọn VPC muốn xóa.</li>
-<li>Click <strong>Actions</strong>.</li>
-<li>Click <strong>Delete VPC</strong>.</li>
-<li>Tại ô confirm, điền <strong>delete</strong> để xác nhận, click <strong>Delete</strong> để thực hiện xóa <strong>Lab VPC</strong> và các tài nguyên liên quan.</li>
-</ul>
+<p>Tạo Endpoint com.amazonaws.region.ecr.dkr chọn cả 2 private subnet của vpc:
+<img alt="ECR" src="/WorkShopOnePage/images/image6.png"></p>
+<p>Tạo Endpoint om.amazonaws.region.ecr.api chọn cả 2 private subnet của vpc:
+<img alt="ECR" src="/WorkShopOnePage/images/image7.png"></p>
+<p>Tạo Gateway Endpoint om.amazonaws.region.s3 chọn route tables của 2 private subnet:
+<img alt="ECR" src="/WorkShopOnePage/images/image8.png"></p>
+<p>Tạo Endpoint om.amazonaws.region.logs chọn cả 2 private subnet của vpc:
+<img alt="ECR" src="/WorkShopOnePage/images/image9.png"></p>
 
 
 
@@ -489,6 +472,26 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -516,23 +519,6 @@
             
         
                     
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
         
@@ -542,10 +528,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/WorkShopOnePage/5-ecscluster/" title="Tạo ECS cluster"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/WorkShopOnePage/3-ecrprivate/" title="Tạo ECR private"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/WorkShopOnePage/1-introduce/" title="Giới thiệu" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/WorkShopOnePage/5-ecscluster/" title="Tạo ECS cluster" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

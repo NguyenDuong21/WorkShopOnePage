@@ -4,7 +4,7 @@
 	"title": "ECR interface VPC endpoints",
 	"tags": [],
 	"description": "",
-	"content": "Kết nối an toàn, tiết kiệm chi phí cho ECS, ECR, CloudWatch sử dụng vpc endpoint Tổng quan Trong bài lab này, chúng ta sẽ cùng tìm hiểu cách thiết lập kết nối an toàn và tiết kiệm chi phí giữa ECS, ECR, CloudWatch, S3 sử dụng vpc endpoint\nNội dung Giới thiệu Các bước chuẩn bị Tạo ECR private và push image Tạo ECS cluster Tạo các ENDPOINT Thử nghiệm kết nối Dọn dẹp tài nguyên "
+	"content": "Kết nối an toàn, tiết kiệm chi phí cho ECS, ECR, CloudWatch sử dụng vpc endpoint Tổng quan Trong bài lab này, chúng ta sẽ cùng tìm hiểu cách thiết lập kết nối an toàn và tiết kiệm chi phí giữa ECS, ECR, CloudWatch, S3 sử dụng vpc endpoint\nNội dung Giới thiệu Các bước chuẩn bị Tạo ECR private và push image Tạo các ENDPOINT Tạo ECS cluster Dọn dẹp tài nguyên "
 },
 {
 	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/1-introduce/",
@@ -21,21 +21,21 @@
 	"content": "Tạo VPC với 2 private subnet theo hình sau:\nChọn VPC and more nhập tên VPC, CIDR, và chọn 2 AZ Chọn 0 public subnet và 2 private subnet, chọn NAT gateways và S3 VPC endpoints là none Tạo và đợi việc tạo VPC hoàn thành. "
 },
 {
-	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/3-ecr-private/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/3-ecrprivate/",
 	"title": "Tạo ECR private",
 	"tags": [],
 	"description": "",
 	"content": "Chú ý: VPC Endpoin không hỗ trợ ECR public\nTrong bước này, chúng ta sẽ thực hiện tạo ECR private và push docker image lên ECR này\nTại ECR console, nhấn Create repository. Tại option Visibility settings chọn Private và Repository name Tải source code mẫu và build image Chọn vào repo và nhấn vào nút View push commands\nTag image vừa build và push lên ECR theo hướng dẫn Sau khi push image ta được kết quả sau: "
 },
 {
-	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/4-vpc-endpoint/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/4-vpcendpoint/",
 	"title": "Tạo VPC endpoint",
 	"tags": [],
 	"description": "",
 	"content": "Trong phần này, chúng ta sẽ cùng tạo VPC endpoint. Để kết nối ECS cluster với ECR, CloudWatch chúng ta cần tạo các endpoin sau:\ncom.amazonaws.region.ecr.dkr: Endpoint này được sử dụng cho Docker Registry APIs. Docker client như push và pull dùng endpoint này. com.amazonaws.region.ecr.api: Endpoint này dùng để gọi đến Amazon ECR API. com.amazonaws.region.s3: ECR dùng s3 để lưu các layer vì vậy ta phải tạo s3 gateway endpoint thì ecs mới có thể pull các layer từ image của ECR. com.amazonaws.region.logs: Dùng cho cloud watch logs Tạo Endpoint com.amazonaws.region.ecr.dkr chọn cả 2 private subnet của vpc: Tạo Endpoint om.amazonaws.region.ecr.api chọn cả 2 private subnet của vpc: Tạo Gateway Endpoint om.amazonaws.region.s3 chọn route tables của 2 private subnet: Tạo Endpoint om.amazonaws.region.logs chọn cả 2 private subnet của vpc: "
 },
 {
-	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/5-ecs-cluster/",
+	"uri": "https://nguyenduong21.github.io/WorkShopOnePage/5-ecscluster/",
 	"title": "Tạo ECS cluster",
 	"tags": [],
 	"description": "",

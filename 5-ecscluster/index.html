@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/WorkShopOnePage/images/favicon.png" type="image/png">
 
-    <title>Dọn dẹp tài nguyên   :: AWS System Manager</title>
+    <title>Tạo ECS cluster :: AWS System Manager</title>
 
     
     <link href="/WorkShopOnePage/css/nucleus.css?1709873662" rel="stylesheet">
@@ -36,7 +36,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/WorkShopOnePage/6-cleanup/">
+  <body class="" data-url="/WorkShopOnePage/5-ecscluster/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -188,7 +188,7 @@
     
     <li data-nav-id="/WorkShopOnePage/5-ecscluster/" title="Tạo ECS cluster" class="dd-item 
         
-        
+        active
         
         ">
       <a href="/WorkShopOnePage/5-ecscluster/">
@@ -214,7 +214,7 @@
     
     <li data-nav-id="/WorkShopOnePage/6-cleanup/" title="Dọn dẹp tài nguyên  " class="dd-item 
         
-        active
+        
         
         ">
       <a href="/WorkShopOnePage/6-cleanup/">
@@ -304,7 +304,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="nguyenduong21.github.io6-cleanup/_index.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="nguyenduong21.github.io5-ECScluster/_index.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -331,7 +331,7 @@
             
           
           
-            <a href='/WorkShopOnePage/'>ECR interface VPC endpoints</a> > Dọn dẹp tài nguyên  
+            <a href='/WorkShopOnePage/'>ECR interface VPC endpoints</a> > Tạo ECS cluster
           
         
           
@@ -342,7 +342,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -358,7 +366,7 @@
           
             <h1>
               
-              Dọn dẹp tài nguyên  
+              Tạo ECS cluster
             </h1>
           
 
@@ -366,38 +374,80 @@
 
 
 
-	<p>Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.</p>
+	<p>Chúng ta sẽ tạo <strong>ECS cluster</strong> pull image Từ <strong>ECR</strong> và push logs qua <strong>CloudWatch</strong> theo VPC endpoint</p>
+<h4 id="tạo-task-definitions">Tạo Task definitions</h4>
 <ol>
-<li>Truy cập <a href="https://console.aws.amazon.com/ecs/v2/clusters">giao diện quản trị dịch vụ ECS</a></li>
+<li>Truy cập vào <a href="https://console.aws.amazon.com/ecs/v2/">giao diện quản trị dịch vụ ECS</a></li>
 </ol>
 <ul>
-<li>Click vào cluster muốn xóa và nhấn Delete cluster.</li>
-<li>Nhập theo yêu cầu và xác nhận delete</li>
+<li>Click <strong>Task definitions</strong> , sau đó Chọn <strong>Create new task definition</strong>.</li>
 </ul>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image12.png"></p>
 <ol start="2">
-<li>Truy cập <a href="https://console.aws.amazon.com/vpcconsole/home">giao diện quản trị dịch vụ VPC</a></li>
+<li>Tại trang <strong>Create new task definition</strong>, Mục <strong>Infrastructure requirements</strong></li>
 </ol>
 <ul>
-<li>Click <strong>Endpoints</strong>.</li>
-<li>Tích vào 4 Endpoints đã tạo và chọn delete</li>
+<li>Tại mục <strong>Task definition family</strong>, điền <strong>Tên Task denfinition</strong>.</li>
+<li>Click chọn <strong>Launch type</strong>. Ở đây chúng ta chọn <strong>AWS Fargate</strong></li>
+<li>Chọn CPU và RAM cho  <strong>Fargate Instance</strong></li>
 </ul>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image13.png"></p>
 <ol start="3">
-<li>Truy cập <a href="https://console.aws.amazon.com/ecr/home">giao diện quản trị dịch vụ ECR</a>.</li>
+<li>Ở mục <strong>Container</strong>.</li>
 </ol>
 <ul>
-<li>Click chọn repositories muốn xóa.</li>
-<li>Click <strong>Delete</strong>, sau đó xác nhận để xóa.</li>
+<li>Nhập tên container, Image URI (đường dẫn của private image mà chúng ta vừa push lên ECR ở mục 3)</li>
+<li>Nhập <strong>Port</strong> và <strong>Port Name</strong>, ở đây ứng dụng của chúng ta expose ra port 3000.</li>
+<li>Click <strong>Create</strong>.</li>
 </ul>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image14.png"></p>
 <ol start="4">
-<li>Truy cập vào <a href="https://console.aws.amazon.com/vpc/home">giao diện quản trị dịch vụ VPC</a></li>
+<li>Sau khi tạo thành công, ta được kết quả sau</li>
+</ol>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image15.png"></p>
+<h4 id="tạo-ecs-cluster">Tạo ECS Cluster</h4>
+<ol>
+<li>
+<p>Truy cập vào <a href="https://console.aws.amazon.com/ecs/v2/">giao diện quản trị dịch vụ ECS</a> ở mục cluster chọn <strong>Create cluster</strong></p>
+</li>
+<li>
+<p>Nhập tên cluster và loại Infrastructure và tạo cluster</p>
+</li>
+</ol>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image16.png"></p>
+<h4 id="tạo-service">Tạo service</h4>
+<ol>
+<li>
+<p>Click vào cluster vừa tạo, Chọn create service</p>
+</li>
+<li>
+<p>Tại mục Compute options, chọn Launch type là FARGATE</p>
+</li>
+</ol>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image17.png"></p>
+<ol start="3">
+<li>Tại Deployment configuration:</li>
 </ol>
 <ul>
-<li>Click <strong>Your VPCs</strong>.</li>
-<li>Click chọn VPC muốn xóa.</li>
-<li>Click <strong>Actions</strong>.</li>
-<li>Click <strong>Delete VPC</strong>.</li>
-<li>Tại ô confirm, điền <strong>delete</strong> để xác nhận, click <strong>Delete</strong> để thực hiện xóa <strong>Lab VPC</strong> và các tài nguyên liên quan.</li>
+<li>Application type chọn là <strong>Service</strong></li>
+<li>Task definition chọn Task definition vừa tạo ở bước trên. Revision là LATEST</li>
+<li>Nhập Service name</li>
+<li>Nhập số lượng replica</li>
+<li>Cuối cùng nhấn vào create</li>
 </ul>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image18.png"></p>
+<ol start="4">
+<li>Kiểm tra service và truy cập thử</li>
+</ol>
+<ul>
+<li>Tại mục service ta có thể thấy số lượng service và tasks đang chạy</li>
+</ul>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image19.png"></p>
+<ul>
+<li>Lấy địa chỉ ip và thử truy cập</li>
+</ul>
+<p><img alt="ECS" src="/WorkShopOnePage/images/image20.png"></p>
+<p>Qua bài này chúng ta đã biết các thiết lập các VPC endpoint để các dịch vụ như ECS, ECR, CloudWatch, S3 giao tiếp bảo mật với nhau không thông qua internet và tiết kiệm chi phí chuyền dữ liệu.</p>
 
 
 
@@ -505,6 +555,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -521,6 +572,8 @@
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -542,10 +595,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/WorkShopOnePage/5-ecscluster/" title="Tạo ECS cluster"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/WorkShopOnePage/4-vpcendpoint/" title="Tạo VPC endpoint"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/WorkShopOnePage/1-introduce/" title="Giới thiệu" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/WorkShopOnePage/6-cleanup/" title="Dọn dẹp tài nguyên  " style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
